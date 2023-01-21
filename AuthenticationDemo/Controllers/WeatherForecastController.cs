@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace AuthenticationDemo.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/weatherforecast")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -18,6 +20,7 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
+    [Authorize]
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
