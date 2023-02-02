@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
@@ -19,23 +14,23 @@ namespace AuthenticationDemo.Controllers
     public class LoginController : ControllerBase
     {
         /// <summary>
-        /// 
+        /// Login endpoint
         /// </summary>
-        /// <param name="loginDTO"></param>
+        /// <param name="login"></param>
         /// <returns></returns>
         ///
         [AllowAnonymous]
         [HttpPost, Route("login")]
-        public IActionResult Login([FromBody] LoginDTO loginDTO)
+        public IActionResult Login([FromBody] Login login)
         {
             try
             {
-                if (string.IsNullOrEmpty(loginDTO.UserName) || string.IsNullOrEmpty(loginDTO.Password))
+                if (string.IsNullOrEmpty(login.UserName) || string.IsNullOrEmpty(login.Password))
                 {
                     return BadRequest("Username and/or Password not specified");
                 }
 
-                if (loginDTO.UserName.Equals("fpug") && loginDTO.Password.Equals("fpug"))
+                if (login.UserName.Equals("fpug") && login.Password.Equals("fpug"))
                 {
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("thisisasecretkey@123"));
 
@@ -44,7 +39,7 @@ namespace AuthenticationDemo.Controllers
                     var jwtSecurityToken = new JwtSecurityToken(
                         issuer: "ABCXYZ",
                         audience: "http://localhost:51398",
-                        claims: new List<Claim>(),
+                        // claims: new List<Claim>(),
                         expires: DateTime.Now.AddMinutes(10),
                         signingCredentials: signinCredentials
                     );

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 
 namespace AuthenticationDemo.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("api/weatherforecast")]
 public class WeatherForecastController : ControllerBase
@@ -20,7 +20,7 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetWeatherForecast"), Authorize]
+    [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
