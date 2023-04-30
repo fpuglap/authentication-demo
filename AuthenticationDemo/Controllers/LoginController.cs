@@ -32,14 +32,14 @@ namespace AuthenticationDemo.Controllers
 
                 if (login.UserName.Equals("fpug") && login.Password.Equals("fpug"))
                 {
-                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("thisisasecretkey@123"));
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jsda093jSJA39RJ3DK"));
 
                     var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                     var jwtSecurityToken = new JwtSecurityToken(
-                        issuer: "ABCXYZ",
-                        audience: "http://localhost:51398",
-                        // claims: new List<Claim>(),
+                        issuer: "fpug",
+                        audience: "localhost:9904",
+                        claims: new List<Claim>(),
                         expires: DateTime.Now.AddMinutes(10),
                         signingCredentials: signinCredentials
                     );
