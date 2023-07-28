@@ -1,0 +1,10 @@
+# Exclude backup files
+*.bak
+
+# Exclude build files and directories
+/bin/
+/obj/
+
+# Exclude dependencies directory
+/packages/
+
