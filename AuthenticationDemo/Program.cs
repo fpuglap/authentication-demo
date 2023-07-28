@@ -1,14 +1,20 @@
 ﻿using System.Text;
 using AuthenticationDemo;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Metadata;
-using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyStorageDirectory = Environment.GetEnvironmentVariable("KEY_STORAGE_DIRECTORY");
+
+// Check if KEY_STORAGE_DIRECTORY is not assigned a value
+if (!string.IsNullOrEmpty(keyStorageDirectory))
+{
+    builder.Services.AddDataProtection()
+        .PersistKeysToFileSystem(new DirectoryInfo(keyStorageDirectory));
+}
 
 builder.Services.AddAuthentication(options =>
 {
