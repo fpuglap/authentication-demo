@@ -4,6 +4,8 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 # Set the working directory inside the container
 WORKDIR /app
 
+ENV ASPNETCORE_URLS=http://+:80
+
 # Copy the application project files into the container
 COPY *.csproj ./
 
